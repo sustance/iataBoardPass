@@ -2,7 +2,7 @@
 import sys
 from datetime import datetime
 
-#YEAR = "2024"  # CHECK THIS IS BEING OBTAINED FROM SHELL
+YEAR = "2023"  # CHECK THIS IS BEING OBTAINED FROM SHELL
 
 def julian_to_date(julian_day):
     """Convert Julian day (DDD) to YYMMDD format"""
@@ -30,7 +30,7 @@ def process_line(line):
     if "/" in parts[0]:
         split0 = parts[0].split("/")
         if len(split0) > 1:
-            c3 = split0[1]
+            c3 = split0[1][:1].replace("C", "S")
 
     # Find 8-char airport code (take first one found)
     for part in parts:
