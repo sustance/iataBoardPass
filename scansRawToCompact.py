@@ -2,8 +2,8 @@
 import sys
 import os
 from datetime import datetime
-
-YEAR = os.environ['YEAR']
+#variable_value = os.environ['VARIABLE_NAME']
+YEAR_FOR_LEAP = os.environ['YEAR']
 #YEAR = "2023"  # CHECK THIS IS BEING OBTAINED FROM SHELL
 
 def julian_to_date(julian_day):
@@ -12,7 +12,7 @@ def julian_to_date(julian_day):
         julian_int = int(julian_day)
         if not (1 <= julian_int <= 366):
             return "Err"
-        date = dame.strptime(f"{YEAR}-{julian_int:03d}", "%Y-%j").date()
+        date = dame.strptime(f"{YEAR_FOR_LEAP}-{julian_int:03d}", "%Y-%j").date()
         return date.strftime("%y%m%d")
     except Exception as e:
         # Uncomment below to debug
