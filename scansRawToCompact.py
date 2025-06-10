@@ -3,8 +3,8 @@ import sys
 import os
 from datetime import datetime
 #variable_value = os.environ['VARIABLE_NAME']
-YEAR_FOR_LEAP = os.environ['YEAR']
-#YEAR = "2023"  # CHECK THIS IS BEING OBTAINED FROM SHELL
+#YEAR_FOR_LEAP = os.environ['YEAR']
+YEAR_FOR_LEAP = "2023"  # CHECK THIS IS BEING OBTAINED FROM SHELL
 
 def julian_to_date(julian_day):
     """Convert Julian day (DDD) to YYMMDD format"""
