@@ -6,6 +6,8 @@ from datetime import datetime
 #YEAR = os.environ['YEAR']
 YEAR = "2023" 
 
+def julian_to_date(julian_day):
+#    """Convert Julian day (DDD) to YYMMDD format"""
 try:
     print(f"Debug: julian_day received = {julian_day}")
     julian_int = int(julian_day)
@@ -19,6 +21,7 @@ try:
 except Exception as e:
     #print(f"Error converting julian day '{julian_day}': {e}", file=sys.stderr)
     return "Err"
+
 
 #def julian_to_date(julian_day):
 #    """Convert Julian day (DDD) to YYMMDD format"""
