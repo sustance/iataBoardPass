@@ -2,7 +2,7 @@
 import sys
 from datetime import datetime
 
-THIS_YEAR = "2024"
+#YEAR = "2024"
 
 def julian_to_date(julian_day):
     """Convert Julian day (DDD) to YYMMDD format"""
@@ -10,7 +10,7 @@ def julian_to_date(julian_day):
         julian_int = int(julian_day)
         if not (1 <= julian_int <= 366):
             return "Err"
-        date = datetime.strptime(f"{THIS_YEAR}-{julian_int:03d}", "%Y-%j").date()
+        date = datetime.strptime(f"{YEAR}-{julian_int:03d}", "%Y-%j").date()
         return date.strftime("%y%m%d")
     except Exception as e:
         # Uncomment below to debug
