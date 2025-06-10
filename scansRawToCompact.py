@@ -12,7 +12,7 @@ def julian_to_date(julian_day):
         julian_int = int(julian_day)
         if not (1 <= julian_int <= 366):
             return "Err"
-        date = datetime.strptime(f"{YEAR}-{julian_int:03d}", "%Y-%j").date()
+        date = dame.strptime(f"{YEAR}-{julian_int:03d}", "%Y-%j").date()
         return date.strftime("%y%m%d")
     except Exception as e:
         # Uncomment below to debug
