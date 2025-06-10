@@ -7,19 +7,19 @@ from datetime import datetime
 YEAR = "2023" 
 
 def julian_to_date(julian_day):
-        """Convert Julian day (DDD) to YYMMDD format"""
+    """Convert Julian day (DDD) to YYMMDD format"""
     try:
-        #print(f"Debug: julian_day received = {julian_day}")
+        print(f"Debug: julian_day received = {julian_day}")
         julian_int = int(julian_day)
-        #print(f"Debug: julian_int converted = {julian_int}")
+        print(f"Debug: julian_int converted = {julian_int}")
         if not (1 <= julian_int <= 366):
             print("Debug: julian_int out of range (1-366)")
             return "Err"
         date = datetime.strptime(f"{YEAR}-{julian_int:03d}", "%Y-%j").date()
-        #print(f"Debug: date parsed = {date}")
+        print(f"Debug: date parsed = {date}")
         return date.strftime("%y%m%d")
     except Exception as e:
-        #print(f"Error converting julian day '{julian_day}': {e}", file=sys.stderr)
+        print(f"Error converting julian day '{julian_day}': {e}", file=sys.stderr)
         return "Err"
 
 def process_line(line):
