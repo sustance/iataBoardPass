@@ -1,82 +1,69 @@
 #!/usr/bin/env python3
 import sys
 from datetime import datetime
-# Must launch this script as '$YEAR scansRawToCompact.py'
-THIS_YEAR = "$YEAR"
-LEAP_YEARS = {2012, 2016, 2020, 2024, 2028, 2032}
 
-def julian_to_yyyymmdd(julian_day):
+THIS_YEAR = "2024"
+
+def julian_to_date(julian_day):
+    """Convert Julian day (DDD) to YYMMDD format"""
     try:
-        year = int(THIS_YEAR)
-        date = datetime.strptime(f"{year} {julian_day}", "%Y %j").date()
+        julian_int = int(julian_day)
+        if not (1 <= julian_int <= 366):
+            return "Err"
+        date = datetime.strptime(f"{THIS_YEAR}-{julian_int:03d}", "%Y-%j").date()
         return date.strftime("%y%m%d")
-    except:
+    except Exception as e:
+        # Uncomment below to debug
+        # print(f"Error converting julian day '{julian_day}': {e}", file=sys.stderr)
         return "Err"
 
 def process_line(line):
-    if not line.strip():
-        return None
-        
+    """Process one line of input data"""
     parts = line.split()
-    
-    # Handle lines starting with M1 or __
-    if line.startswith("M1") or line.startswith("__"):
-        # Extract C3 (KYM/CHUN)
-        c3 = "Err"
-        if "/" in parts[0]:
-            c3 = parts[0].split("/")[1]
-            if c3 == "CHUN":
-                c3 = "C2N"
-        
-        # Find airport pairs (C5, C6)
-        c5, c6, c7 = "Err", "Err", "Err"
-        for part in parts:
-            if len(part) == 6 and part.isalpha():  # Airport code pattern
-                c5 = part[:3]
-                c6 = part[3:]
-                break
-        
-        # Find airline (C7) - look for 2-letter codes after airport pair
-        for i, part in enumerate(parts):
-            if part in ["CX", "NZ", "MU", "BR", "EK", "KL", "OS", "HX", "CA"]:
-                c7 = part
-                break
-        
-        # Find C8 and C9
-        c8, c9 = "Err", "Err"
-        for i, part in enumerate(parts):
-            if part.isdigit() and len(part) == 4:  # C8 pattern
-                c8 = part
-                if i+1 < len(parts) and (parts[i+1].isdigit() or parts[i+1][:-1].isdigit()):  # C9 pattern
-                    c9 = parts[i+1].rstrip('z').rstrip('Y')  # Clean suffixes
-                break
-        
-        # Generate output
-        if c9 != "Err":
-            ca = julian_to_yyyymmdd(int(c9))
-        else:
-            ca = "Err"
-        
-        return f"{ca}  |  {c3}  |  {c5}  |  {c6}  |  {c7}  |  {c8}  |  {c9}"
-    
-    return None
+    if not parts:
+        return "Err  |  Err  |  Err  |  Err  |  Err  |  Err  |  Err"
+
+    # Initialize all fields
+    c3 = c5 = c6 = c7 = c8 = c9 = "Err"
+
+    # Extract C3 (name part after /)
+    if "/" in parts[0]:
+        split0 = parts[0].split("/")
+        if len(split0) > 1:
+            c3 = split0[1]
+
+    # Find 8-char airport code (take first one found)
+    for part in parts:
+        if len(part) == 8:
+            c5 = part[:3]
+            c6 = part[3:6]
+            c7 = part[6:]
+            break
+
+    # Find C8 (first 4-digit number)
+    for i, part in enumerate(parts):
+        if part.isdigit() and len(part) == 4:
+            c8 = part
+            # C9 is next part (take first 3 digits if possible)
+            if i + 1 < len(parts):
+                next_part = parts[i + 1]
+                # Extract first 3 digits from next_part if available
+                digits = ''.join(filter(str.isdigit, next_part))
+                c9 = digits[:3] if len(digits) >= 3 else "Err"
+            break
+
+    # Convert Julian date
+    ca = julian_to_date(c9) if c9.isdigit() else "Err"
+
+    return f"{ca}  |  {c3}  |  {c5}  |  {c6}  |  {c7}  |  {c8}  |  {c9}"
 
 def main():
-    # Read from stdin or file
-    if len(sys.argv) > 1:
-        with open(sys.argv[1], 'r') as f:
-            data = f.read().splitlines()
-    else:
-        data = sys.stdin.read().splitlines()
-    
-    # Process each line
-    for line in data:
-        if line.strip():  # Only process non-empty lines
-            processed = process_line(line)
-            if processed:
-                print(processed)
-            else:
-                print("Err  |  Err  |  Err  |  Err  |  Err  |  Err  |  Err")
+    """Main processing function"""
+    for line in sys.stdin:
+        line = line.strip()
+        if line:  # Only process non-empty lines
+            result = process_line(line)
+            print(result)
 
 if __name__ == "__main__":
     main()
