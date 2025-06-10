@@ -17,7 +17,7 @@ try:
     print(f"Debug: date parsed = {date}")
     return date.strftime("%y%m%d")
 except Exception as e:
-    print(f"Error converting julian day '{julian_day}': {e}", file=sys.stderr)
+    #print(f"Error converting julian day '{julian_day}': {e}", file=sys.stderr)
     return "Err"
 
 #def julian_to_date(julian_day):
