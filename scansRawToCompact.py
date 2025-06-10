@@ -60,7 +60,6 @@ def process_line(line):
 
 def main():
     """Main processing function"""
-    #print($YEAR)
     print ("this came from the shell script")
     for line in sys.stdin:
         line = line.strip()
