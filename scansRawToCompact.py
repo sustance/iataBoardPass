@@ -2,7 +2,7 @@
 import sys
 from datetime import datetime
 
-#YEAR = "2024"
+#YEAR = "2024"  # CHECK THIS IS BEING OBTAINED FROM SHELL
 
 def julian_to_date(julian_day):
     """Convert Julian day (DDD) to YYMMDD format"""
