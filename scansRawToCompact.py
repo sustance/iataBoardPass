@@ -2,7 +2,8 @@
 import sys
 from datetime import datetime
 
-YEAR = "2023"  # CHECK THIS IS BEING OBTAINED FROM SHELL
+YEAR = os.environ['YEAR']
+#YEAR = "2023"  # CHECK THIS IS BEING OBTAINED FROM SHELL
 
 def julian_to_date(julian_day):
     """Convert Julian day (DDD) to YYMMDD format"""
@@ -59,6 +60,8 @@ def process_line(line):
 
 def main():
     """Main processing function"""
+    print($YEAR)
+    print ("this came from the shell script")
     for line in sys.stdin:
         line = line.strip()
         if line:  # Only process non-empty lines
