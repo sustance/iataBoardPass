@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import sys
 from datetime import datetime
-
-THIS_YEAR = "2024"
+# Must launch this script as '$YEAR scansRawToCompact.py'
+THIS_YEAR = "$YEAR"
 LEAP_YEARS = {2012, 2016, 2020, 2024, 2028, 2032}
 
 def julian_to_yyyymmdd(julian_day):
