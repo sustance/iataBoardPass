@@ -4,7 +4,7 @@ import sys
 from datetime import datetime
 #variable_value = os.environ['VARIABLE_NAME']
 #YEAR = os.environ['YEAR']
-YEAR = "2023" 
+YEAR = "2025" 
 
 def julian_to_date(julian_day):
     """Convert Julian day (DDD) to YYMMDD format"""
