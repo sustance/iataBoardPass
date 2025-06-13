@@ -60,9 +60,7 @@ def process_line(line):
     # Convert Julian date
     ca = julian_to_date(c9) if c9.isdigit() else "Err"
 
-    for i, part in enumerate(parts):
-        c10 = "*"
-        break  
+    c10 = "*" 
 
     return f"{ca}, {c3}, {c5}, {c6}, {c7},{c8}, {c9},{c10}"
 
