@@ -60,21 +60,11 @@ def process_line(line):
     # Convert Julian date
     ca = julian_to_date(c9) if c9.isdigit() else "Err"
 
+    for i, part in enumerate(parts):
+        c10 = "*"
+        break  
 
-
-
-
-    
-    #for i, part in enumerate(parts):
-    #    if ca == "25025":
-    #        c10 = "#"
-    #    break
-
-
-
-    
-
-    return f"{ca}, {c3}, {c5}, {c6}, {c7},{c8}, {c9},@"
+    return f"{ca}, {c3}, {c5}, {c6}, {c7},{c8}, {c9},{c10}"
 
 def main():
     """Main processing function"""
