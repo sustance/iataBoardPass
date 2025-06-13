@@ -26,7 +26,7 @@ def process_line(line):
     """Process one line of input data"""
     parts = line.split()
     if not parts:
-        return "Err  |  Err  |  Err  |  Err  |  Err  |  Err  |  Err"
+        return "Err, Err, Err, Err,Err, Err,Err"
 
     # Initialize all fields
     c3 = c5 = c6 = c7 = c8 = c9 = "Err"
@@ -60,7 +60,21 @@ def process_line(line):
     # Convert Julian date
     ca = julian_to_date(c9) if c9.isdigit() else "Err"
 
-    return f"{ca}  |  {c3}  |  {c5}  |  {c6}  |  {c7}  |  {c8}  |  {c9}"
+
+
+
+
+    
+    #for i, part in enumerate(parts):
+    #    if ca == "25025":
+    #        c10 = "#"
+    #    break
+
+
+
+    
+
+    return f"{ca}, {c3}, {c5}, {c6}, {c7},{c8}, {c9},@"
 
 def main():
     """Main processing function"""
