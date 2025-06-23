@@ -12,14 +12,14 @@ ssh-add ~/.ssh/id_ed25519  # or whatever your private key is named
 
 # THIS FAILS UNLESS THE DIRECTORY IS EMPTY
 rm $HOME/tmp/*
-git clone git@github.com:sustance/pdata.git $HOME/tmp
+git clone git@github.com:sustance/pdata.git $HOME/tmp/pdata/
 # passphrase is "kym.michael@gmail.com" perhaps need to do manually once per session
  
-/bin/curl https://raw.githubusercontent.com/sustance/iataBoardPass/refs/heads/main/scansRawToCompact.py -o $HOME/tmp/scansRawToCompact.py
-#/bin/curl ${gith}scansRawToCompact.py -o $HOME/tmp/scansRawToCompact.py
- 
- 
- 
+/bin/curl \
+https://raw.githubusercontent.com/sustance/iataBoardPass/refs/heads/main/scansRawToCompact.py \
+-o $HOME/tmp/scansRawToCompact.py
+
+
  # Check if YEAR is set
  if [ -z "$YEAR" ]; then
      echo "Error: YEAR environment variable not set."
@@ -27,7 +27,8 @@ git clone git@github.com:sustance/pdata.git $HOME/tmp
      exit
  fi
  
- YEAR_FILE="${YEAR}raw.csv"
+ YEAR_FILE="IATA_BP_Scans_${YEAR}raw.csv"
  echo "Working on Year $YEAR ..."
 
-YEAR=${YEAR} $HOME/tmp/scansRawToCompact.py
+YEAR=${YEAR} cat ${HOME}/tmp/pdata/IATA_BP_Scans_2025 | python3 $HOME/tmp/scansRawToCompact.py
+
