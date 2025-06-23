@@ -16,8 +16,8 @@ git clone git@github.com:sustance/pdata.git $HOME/tmp/pdata/
 # passphrase is "kym.michael@gmail.com" perhaps need to do manually once per session
  
 /bin/curl \
-https://raw.githubusercontent.com/sustance/iataBoardPass/refs/heads/main/scansRawToCompact.py \
--o $HOME/tmp/scansRawToCompact.py
+https://raw.githubusercontent.com/sustance/iataBoardPass/refs/heads/main/Flight_Data_Processing.py \
+-o $HOME/tmp/Flight_Data_Processing.py
 
 
  # Check if YEAR is set
